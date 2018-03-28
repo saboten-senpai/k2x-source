@@ -231,8 +231,8 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
     statusBar()->addWidget(progressBar);
     statusBar()->addPermanentWidget(frameBlocks);
     statusBar()->setObjectName("statusBar");
-    statusBar()->setStyleSheet("#statusBar { color: #ffffff; background-color: qradialgradient(cx: -0.8, cy: 0, fx: -0.8, fy: 0, radius: 0.6, stop: 0 #101010, stop: 1 #404040);  }");
-
+    statusBar()->setStyleSheet(fUseBlackTheme ?"#statusBar { color: #ffffff; background-color: #0F0F0F; border-bottom-color: rgb(195,23,22); border-bottom-style: solid; border-bottom-width: 4px;}":"#statusBar { color: #ffffff; background-color: qradialgradient(cx: -0.8, cy: 0, fx: -0.8, fy: 0, radius: 0.6, stop: 0 #101010, stop: 1 #404040);  }"); 
+   
     syncIconMovie = new QMovie(fUseBlackTheme ? ":/movies/update_spinner_black" : ":/movies/update_spinner", "mng", this);
 
     // Clicking on a transaction on the overview page simply sends you to transaction history page
@@ -467,7 +467,7 @@ static QWidget* makeToolBarSpacer()
 {
     QWidget* spacer = new QWidget();
     spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    spacer->setStyleSheet("QWidget { background: none; }");
+    spacer->setStyleSheet(fUseBlackTheme ? "QWidget { background: #0F0F0F; }" : "QWidget { background: none; }");
     return spacer;
 }
 
@@ -479,7 +479,7 @@ void BitcoinGUI::createToolBars()
     toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     toolbar->setContextMenuPolicy(Qt::PreventContextMenu);
     toolbar->setObjectName("tabs");
-    toolbar->setStyleSheet("QToolButton { color: #ffffff; font-size: 13px; font-weight: 500; font-family: 'Roboto'; padding: 5px; padding-left: 8px; border: none; }" 
+    toolbar->setStyleSheet(fUseBlackTheme ?"#tabs { color: #000000; background-color: #0F0F0F; border: none; padding-top: 0px; padding-bottom: 0px; }" :"QToolButton { color: #ffffff; font-size: 13px; font-weight: 500; font-family: 'Roboto'; padding: 5px; padding-left: 8px; border: none; }" 
                            "QToolButton:hover { background-color: #404040; border: none; padding-top: 5px; padding-bottom: 5px; }" 
                            //"QToolButton:checked { background-color: #696969; border: none; padding-top: 5px; padding-bottom: 5px; }"
                            "QToolButton:checked { background-color: #ffffff; color: #B22222; border: none; padding-top: 5px; padding-bottom: 5px; }"
@@ -488,7 +488,7 @@ void BitcoinGUI::createToolBars()
 	
 
     QLabel* header = new QLabel();
-    header->setMinimumSize(152, 152);
+    header->setMinimumSize(156, 156);
     header->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     header->setPixmap(QPixmap(":/images/header"));
     header->setScaledContents(false);
@@ -524,7 +524,7 @@ void BitcoinGUI::createToolBars()
     addToolBar(Qt::LeftToolBarArea, toolbar);
 
     foreach(QAction *action, toolbar->actions()) {
-        toolbar->widgetForAction(action)->setFixedWidth(152);
+        toolbar->widgetForAction(action)->setFixedWidth(156);
     }
 }
 
